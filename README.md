@@ -1,6 +1,6 @@
 # llama.vscode
 
-Local LLM-assisted text completion extension for VS Code
+VS Code 的本地 LLM 辅助文本完成扩展
 
 ![image](https://github.com/user-attachments/assets/857acc41-0b6c-4899-8f92-3020208a21eb)
 
@@ -8,33 +8,32 @@ Local LLM-assisted text completion extension for VS Code
 
 ![llama vscode-swift0](https://github.com/user-attachments/assets/b19499d9-f50d-49d4-9dff-ff3e8ba23757)
 
-## Features
+## 特征
 
-- Auto-suggest on input
-- Accept a suggestion with `Tab`
-- Accept the first line of a suggestion with `Shift + Tab`
-- Accept the next word with `Ctrl/Cmd + Right`
-- Toggle the suggestion manually by pressing `Ctrl + L`
-- Control max text generation time
-- Configure scope of context around the cursor
-- Ring context with chunks from open and edited files and yanked text
-- [Supports very large contexts even on low-end hardware via smart context reuse](https://github.com/ggerganov/llama.cpp/pull/9787)
-- Display performance stats
+- 输入时自动提示
+- 按 `Tab` 键接受建议
+- 按 `Shift + Tab` 键接受建议的第一行
+- 按 `Ctrl/Cmd + Right` 键接受下一个单词
+- 按 `Ctrl + L` 键手动切换建议
+- 控制最大文本生成时间
+- 配置光标周围上下文的范围
+- 用打开和编辑的文件以及剪切的文本片段环绕上下文
+- [通过智能上下文复用支持在低端硬件上处理非常大的上下文](https://github.com/ggerganov/llama.cpp/pull/9787)
+- 显示性能统计信息
 
-## Installation
+## 安装
 
-### VS Code extension setup
+### VS Code扩展设置
 
-Install the [llama-vscode](https://marketplace.visualstudio.com/items?itemName=ggml-org.llama-vscode) extension from the VS Code extension marketplace:
+从VS Code扩展市场安装[llama-vscode](https://marketplace.visualstudio.com/items?itemName=ggml-org.llama-vscode)扩展：
 
-![image](https://github.com/user-attachments/assets/a5998b49-49c5-4623-b3a8-7100b72af27e)
+![图片](https://github.com/user-attachments/assets/a5998b49-49-c5-4623-b3a8-7100-b72af27e)
 
-Note: also available at [Open VSX](https://open-vsx.org/extension/ggml-org/llama-vscode)
+注：也可在[Open VSX](https://open-vsx.org/extension/ggml-org/llama-vscode)获得
 
-### `llama.cpp` setup
+### ' llama.cpp ' setup
 
-The plugin requires a [llama.cpp](https://github.com/ggerganov/llama.cpp) server instance to be running at the configured endpoint:
-
+该插件需要一个[llama.cpp](https://github.com/ggerganov/llama.cpp)服务器实例在配置的端点上运行:
 <img width="508" alt="image" src="https://github.com/user-attachments/assets/1cc40392-a92c-46df-8a4d-aa762c692ad7" />
 
 #### Mac OS
@@ -43,15 +42,15 @@ The plugin requires a [llama.cpp](https://github.com/ggerganov/llama.cpp) server
 brew install llama.cpp
 ```
 
-#### Any other OS
+#### 其他操作系统
 
-Either use the [latest binaries](https://github.com/ggerganov/llama.cpp/releases) or [build llama.cpp from source](https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md). For more information how to run the `llama.cpp` server, please refer to the [Wiki](https://github.com/ggml-org/llama.vscode/wiki).
+使用[最新的二进制文件](https://github.com/ggerganov/llama.cpp/releases)或[从源代码构建llama.cpp](https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md)。更多关于如何运行`llama.cpp`服务器的信息，请参考[Wiki](https://github.com/ggml-org/llama.vscode/wiki)。
 
-### llama.cpp settings
+llama.cpp设置
 
-Here are recommended settings, depending on the amount of VRAM that you have:
+以下是建议的设置，具体取决于您拥有的VRAM数量：
 
-- More than 16GB VRAM:
+-大于16GB VRAM：
 
   ```bash
   llama-server \
@@ -60,7 +59,7 @@ Here are recommended settings, depending on the amount of VRAM that you have:
       --ctx-size 0 --cache-reuse 256
   ```
 
-- Less than 16GB VRAM:
+-小于16GB VRAM：
 
   ```bash
   llama-server \
@@ -69,7 +68,7 @@ Here are recommended settings, depending on the amount of VRAM that you have:
       --ctx-size 0 --cache-reuse 256
   ```
 
-- Less than 8GB VRAM:
+-小于8GB VRAM：
 
   ```bash
   llama-server \
@@ -79,9 +78,9 @@ Here are recommended settings, depending on the amount of VRAM that you have:
   ```
 
 <details>
-  <summary>CPU-only configs</summary>
+  <summary>只使用cpu</summary>
 
-These are `llama-server` settings for CPU-only hardware. Note that the quality will be significantly lower:
+这些都是只支持cpu的硬件的`llama-server`设置。请注意，质量将明显降低：
 
 ```bash
 llama-server \
@@ -96,29 +95,29 @@ llama-server \
 ```
 </details>
 
-You can use any other FIM-compatible model that your system can handle. By default, the models downloaded with the `-hf` flag are stored in:
+您可以使用系统可以处理的任何其他fim兼容模型。默认情况下，使用`-hf`标志下载的模型存储在：
 
 - Mac OS: `~/Library/Caches/llama.cpp/`
 - Linux: `~/.cache/llama.cpp`
 - Windows: `LOCALAPPDATA`
 
-### Recommended LLMs
+### 推荐llm
 
-The plugin requires FIM-compatible models: [HF collection](https://huggingface.co/collections/ggml-org/llamavim-6720fece33898ac10544ecf9)
+该插件需要fim兼容的模型：[HF集合](https://huggingface.co/collections/ggml-org/llamavim-6720fece33898ac10544ecf9)
 
-## Examples
+## 例子
 
-Speculative FIMs running locally on a M2 Studio:
+在M2 Studio上本地运行的投机公司：
 
 https://github.com/user-attachments/assets/cab99b93-4712-40b4-9c8d-cf86e98d4482
 
-## Implementation details
+## 实现细节
 
-The extension aims to be very simple and lightweight and at the same time to provide high-quality and performant local FIM completions, even on consumer-grade hardware.
+该扩展旨在非常简单和轻量级，同时提供高质量和高性能的本地FIM完成，甚至在消费级硬件上。
 
-- The initial implementation was done by Ivaylo Gardev [@igardev](https://github.com/igardev) using the [llama.vim](https://github.com/ggml-org/llama.vim) plugin as a reference
-- Techincal description: https://github.com/ggerganov/llama.cpp/pull/9787
+-最初的实现是由Ivaylo Gardev [@igardev](https://github.com/igardev)使用[llama.vim](https://github.com/ggml-org/llama.vim)插件作为参考完成的
+—技术说明：https://github.com/ggerganov/llama.cpp/pull/9787
 
-## Other IDEs
+## 其他ide
 
-- Vim/Neovim: https://github.com/ggml-org/llama.vim
+— Vim/Neovim: https://github.com/ggml-org/llama.vim
